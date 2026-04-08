@@ -12,7 +12,7 @@
         <div class="security-scan">Scanning...</div>
     </div>
     <div id="language-screen" class="hidden">
-        <h2>Select Language</h2>
+        <h2 style="margin:20px 0;">Select Language</h2>
         <div class="flag-container" id="flag-list"></div>
     </div>
     <div id="legal-screen" class="hidden">
@@ -30,9 +30,9 @@
         <div id="mood-grid">
             <div class="mood-btn" onclick="openAngry()">ANGRY</div>
             <div class="mood-btn" onclick="openDepression()">DEPRESSION</div>
-            <div class="mood-btn">FUNNY</div>
-            <div class="mood-btn">MOTIVATION</div>
-            <div class="mood-btn noble-btn">NOBLE DEEDS</div>
+            <div class="mood-btn" onclick="openMood('funny')">FUNNY</div>
+            <div class="mood-btn" onclick="openMood('motivation')">MOTIVATION</div>
+            <div class="mood-btn noble-btn" onclick="openNoble()">NOBLE DEEDS</div>
         </div>
     </div>
     <div id="angry-mode" class="hidden">
