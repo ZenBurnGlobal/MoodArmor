@@ -1,51 +1,70 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>MoodArmor</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <div id="splash-screen">
-        <h1 class="logo-animation">MoodArmor</h1>
-        <div class="security-scan">Scanning...</div>
-    </div>
-    <div id="language-screen" class="hidden">
-        <h2>Select Language</h2>
-        <div class="flag-container" id="flag-list"></div>
-    </div>
-    <div id="legal-screen" class="hidden">
-        <h2>Privacy Policy</h2>
-        <p id="legal-text" style="margin:20px; color:#ccc; font-size:14px;"></p>
-        <button id="accept-btn" class="btn-primary">I AGREE</button>
-    </div>
-    <div id="main-character-screen" class="hidden">
-        <div id="char-box"><img src="https://i.ibb.co/vzYp5zP/char-static.png"></div>
-        <div class="dialogue"><p id="character-speech"></p></div>
-        <button id="start-journey-btn" class="btn-primary">START JOURNEY</button>
-    </div>
-    <div id="mood-hub" class="hidden">
-        <h2>Mood Hub</h2>
-        <div id="mood-grid">
-            <div class="mood-btn" onclick="openAngry()">ANGRY</div>
-            <div class="mood-btn" onclick="openDepression()">DEPRESSION</div>
-            <div class="mood-btn">FUNNY</div>
-            <div class="mood-btn">MOTIVATION</div>
-            <div class="mood-btn noble-btn">NOBLE DEEDS</div>
-        </div>
-    </div>
-    <div id="angry-mode" class="hidden">
-        <h2>STRESS BUSTER</h2>
-        <div id="bubble-container"></div>
-        <button onclick="backToHub()" class="btn-primary" style="background:#444;">BACK</button>
-    </div>
-    <div id="depression-mode" class="hidden">
-        <h2>90-SEC RULE</h2>
-        <div id="timer-display">90</div>
-        <p id="dep-msg">Observe the feeling, let it pass.</p>
-        <button onclick="backToHub()" class="btn-primary" style="background:#444;">BACK</button>
-    </div>
-    <script src="script.js"></script>
-</body>
-</html>
+window.addEventListener('load', () => {
+    setTimeout(() => {
+        document.getElementById('splash-screen').classList.add('hidden');
+        document.getElementById('language-screen').classList.remove('hidden');
+        renderFlags();
+    }, 3000);
+});
+
+const languages = [
+    { name: "English", code: "en", flag: "https://flagcdn.com/us.svg", msg: "Privacy Protected.", greet: "Hello! I am your Guard." },
+    { name: "Hindi", code: "hi", flag: "https://flagcdn.com/in.svg", msg: "गोपनीयता सुरक्षित है।", greet: "नमस्ते! मैं आपकी रक्षक हूँ।" }
+];
+
+function renderFlags() {
+    const list = document.getElementById('flag-list');
+    languages.forEach(lang => {
+        const div = document.createElement('div');
+        div.style.cssText = "background:#222; padding:10px; border-radius:10px; width:110px; text-align:center;";
+        div.innerHTML = `<img src="${lang.flag}" style="width:30px;"><p style="font-size:12px;">${lang.name}</p>`;
+        div.onclick = () => {
+            document.getElementById('language-screen').classList.add('hidden');
+            document.getElementById('legal-screen').classList.remove('hidden');
+            document.getElementById('legal-text').innerText = lang.msg;
+            document.getElementById('accept-btn').onclick = () => {
+                document.getElementById('legal-screen').classList.add('hidden');
+                document.getElementById('main-character-screen').classList.remove('hidden');
+                document.getElementById('character-speech').innerText = lang.greet;
+            };
+        };
+        list.appendChild(div);
+    });
+}
+
+document.getElementById('start-journey-btn').onclick = () => {
+    document.getElementById('main-character-screen').classList.add('hidden');
+    document.getElementById('mood-hub').classList.remove('hidden');
+};
+
+function openAngry() {
+    document.getElementById('mood-hub').classList.add('hidden');
+    document.getElementById('angry-mode').classList.remove('hidden');
+    const cont = document.getElementById('bubble-container');
+    cont.innerHTML = "";
+    for(let i=0; i<25; i++) {
+        const b = document.createElement('div');
+        b.className = 'bubble';
+        b.onclick = () => b.classList.add('popped');
+        cont.appendChild(b);
+    }
+}
+
+function openDepression() {
+    document.getElementById('mood-hub').classList.add('hidden');
+    document.getElementById('depression-mode').classList.remove('hidden');
+    let timeLeft = 90;
+    const timer = setInterval(() => {
+        timeLeft--;
+        document.getElementById('timer-display').innerText = timeLeft;
+        if(timeLeft <= 0) {
+            clearInterval(timer);
+            document.getElementById('dep-msg').innerText = "Feel better now?";
+        }
+    }, 1000);
+}
+
+function backToHub() {
+    document.getElementById('angry-mode').classList.add('hidden');
+    document.getElementById('depression-mode').classList.add('hidden');
+    document.getElementById('mood-hub').classList.remove('hidden');
+}
