@@ -1,43 +1,20 @@
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: sans-serif; -webkit-tap-highlight-color: transparent; }
 body, html { width: 100%; height: 100%; background: #000; color: #fff; overflow: hidden; }
 .hidden { display: none !important; }
-
-#splash-screen, #language-screen, #legal-screen, #main-character-screen, #mood-hub, #angry-mode {
+#splash-screen, #language-screen, #legal-screen, #main-character-screen, #mood-hub, #angry-mode, #depression-mode {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #000;
 }
-
 .logo-animation { font-size: 2.5rem; font-weight: bold; background: linear-gradient(90deg, #ff0000, #fff, #ff0000); -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: shine 3s infinite linear; background-size: 200%; }
 @keyframes shine { 0% { background-position: 0%; } 100% { background-position: 200%; } }
-
-.btn-primary { padding: 15px 40px; background: #ff0000; color: white; border: none; border-radius: 30px; font-weight: bold; margin-top: 20px; cursor: pointer; }
-
+.btn-primary { padding: 15px 40px; background: #ff0000; color: white; border: none; border-radius: 30px; font-weight: bold; margin-top: 20px; }
+.flag-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; padding: 20px; }
 #mood-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; padding: 20px; width: 100%; }
-.mood-btn { padding: 20px; border-radius: 15px; border: 2px solid #333; background: #111; color: white; font-weight: bold; text-align: center; }
+.mood-btn { padding: 20px; border-radius: 15px; border: 2px solid #333; background: #111; font-weight: bold; text-align: center; }
 .noble-btn { grid-column: span 2; background: linear-gradient(45deg, #ffd700, #b8860b); color: #000; }
-
-#bubble-container {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 10px;
-    padding: 20px;
-    width: 90%;
-    max-height: 60vh;
-    overflow-y: auto;
-}
-
-.bubble {
-    width: 50px;
-    height: 50px;
-    background: radial-gradient(circle, #ff4d4d, #990000);
-    border-radius: 50%;
-    box-shadow: 0 4px 10px rgba(255,0,0,0.5);
-    cursor: pointer;
-    transition: 0.1s;
-}
-
-.bubble.popped {
-    transform: scale(0.8);
-    background: #222;
-    box-shadow: none;
-    opacity: 0.5;
-}
+#bubble-container { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; }
+.bubble { width: 45px; height: 45px; background: radial-gradient(circle, #ff0000, #000); border-radius: 50%; }
+.bubble.popped { opacity: 0.2; transform: scale(0.8); }
+#timer-display { font-size: 5rem; color: #ff0000; font-weight: bold; }
+#char-box { height: 50%; }
+#char-box img { height: 100%; }
+.dialogue { padding: 15px; border: 1px solid red; width: 90%; border-radius: 10px; text-align: center; }
