@@ -3,49 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>MoodArmor</title>
+    <title>GenBurnGlobal - Master Your Emotions</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="splash-screen">
-        <h1 class="logo-animation">MoodArmor</h1>
-        <div class="security-scan">Scanning...</div>
-    </div>
-    <div id="language-screen" class="hidden">
-        <h2 style="margin:20px 0;">Select Language</h2>
-        <div class="flag-container" id="flag-list"></div>
-    </div>
-    <div id="legal-screen" class="hidden">
-        <h2>Privacy Policy</h2>
-        <p id="legal-text" style="margin:20px; color:#ccc; font-size:14px;"></p>
-        <button id="accept-btn" class="btn-primary">I AGREE</button>
-    </div>
-    <div id="main-character-screen" class="hidden">
-        <div id="char-box"><img src="https://i.ibb.co/vzYp5zP/char-static.png"></div>
-        <div class="dialogue"><p id="character-speech"></p></div>
-        <button id="start-journey-btn" class="btn-primary">START JOURNEY</button>
-    </div>
-    <div id="mood-hub" class="hidden">
-        <h2>Mood Hub</h2>
-        <div id="mood-grid">
-            <div class="mood-btn" onclick="openAngry()">ANGRY</div>
-            <div class="mood-btn" onclick="openDepression()">DEPRESSION</div>
-            <div class="mood-btn" onclick="openMood('funny')">FUNNY</div>
-            <div class="mood-btn" onclick="openMood('motivation')">MOTIVATION</div>
-            <div class="mood-btn noble-btn" onclick="openNoble()">NOBLE DEEDS</div>
+
+    <div id="splash-screen" class="screen">
+        <h1 class="logo-animation">GenBurnGlobal</h1>
+        <div class="security-box">
+            <p id="scan-text">Initializing Security Protocols...</p>
+            <div class="progress-bar"><div class="progress-fill"></div></div>
         </div>
     </div>
-    <div id="angry-mode" class="hidden">
-        <h2>STRESS BUSTER</h2>
-        <div id="bubble-container"></div>
-        <button onclick="backToHub()" class="btn-primary" style="background:#444;">BACK</button>
+
+    <div id="language-screen" class="screen hidden">
+        <h2>SELECT REGION</h2>
+        <div id="flag-container" class="grid-container"></div>
     </div>
-    <div id="depression-mode" class="hidden">
-        <h2>90-SEC RULE</h2>
-        <div id="timer-display">90</div>
-        <p id="dep-msg">Observe the feeling, let it pass.</p>
-        <button onclick="backToHub()" class="btn-primary" style="background:#444;">BACK</button>
+
+    <div id="legal-screen" class="screen hidden">
+        <div class="legal-box">
+            <h2 id="legal-title">Compliance & Privacy</h2>
+            <div id="legal-content"></div>
+            <div class="consent-items">
+                <label><input type="checkbox" id="age-check"> I am 18+ Years Old</label>
+                <label><input type="checkbox" id="gdpr-check"> Accept GDPR & Data Policy</label>
+                <label><input type="checkbox" id="ads-check"> Allow Personalized Experience</label>
+            </div>
+            <button id="proceed-btn" class="btn-main" disabled>PROCEED TO HOME</button>
+        </div>
     </div>
+
+    <div id="home-screen" class="screen hidden">
+        <header>
+            <button id="settings-trigger">⚙️</button>
+            <div class="fake-ad-top">ADVERTISEMENT BANNERS</div>
+        </header>
+
+        <main>
+            <div id="character-area">
+                <div class="char-container">
+                    <img src="https://i.ibb.co/vzYp5zP/char-static.png" id="girl-img" alt="GenBurn Girl">
+                    <div class="speech-bubble"><p id="girl-text">Welcome, Warrior.</p></div>
+                </div>
+            </div>
+
+            <div id="mood-buttons" class="grid-container">
+                <button onclick="showModule('angry')" class="mood-btn">ANGRY</button>
+                <button onclick="showModule('depression')" class="mood-btn">DEPRESSION</button>
+                <button onclick="showModule('funny')" class="mood-btn">FUNNY</button>
+                <button onclick="showModule('motivation')" class="mood-btn">MOTIVATION</button>
+                <button onclick="showModule('noble')" class="mood-btn noble-btn">NOBLE DEED</button>
+            </div>
+        </main>
+
+        <footer>
+            <button class="donate-btn">☕ Buy Me a Coffee</button>
+            <button onclick="location.reload()" class="exit-btn">EXIT</button>
+        </footer>
+    </div>
+
+    <div id="settings-modal" class="modal hidden">
+        <div class="modal-content">
+            <h3>SETTINGS</h3>
+            <button onclick="toggleTheme()">Toggle Dark/Light</button>
+            <button onclick="toggleSound()">Sound ON/OFF</button>
+            <button onclick="showLeaderboard()">Leaderboard</button>
+            <button onclick="showTree()">Growth Tree</button>
+            <button onclick="closeSettings()">CLOSE</button>
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
