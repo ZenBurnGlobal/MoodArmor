@@ -1,77 +1,28 @@
-:root {
-    --primary: #ff0000;
-    --bg: #000000;
-    --text: #ffffff;
-    --gold: #ffd700;
-}
+:root { --red: #ff0000; --gold: #ffd700; --bg: #000; --text: #fff; }
+* { margin:0; padding:0; box-sizing: border-box; font-family: sans-serif; }
+body, html { width:100%; height:100%; background:var(--bg); color:var(--text); overflow:hidden; }
+.screen { width:100vw; height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:20px; text-align:center; position:fixed; }
+.hidden { display:none !important; }
 
-* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+/* Animations */
+.logo-animation { font-size: 2.5rem; background: linear-gradient(90deg, #f00, #fff, #f00); background-size:200%; -webkit-background-clip:text; -webkit-text-fill-color:transparent; animation: shine 3s infinite linear; }
+@keyframes shine { to { background-position: 200%; } }
 
-body, html { 
-    width: 100%; height: 100%; 
-    background: var(--bg); color: var(--text);
-    overflow: hidden; /* No sideways scroll */
-}
+/* Grid & Buttons */
+.grid-container { display:grid; grid-template-columns: 1fr 1fr; gap:10px; width:100%; max-width:400px; margin-top:20px; }
+.mood-btn { padding:15px; background:#111; border:1px solid #333; color:#fff; border-radius:10px; font-weight:bold; }
+.noble-btn { grid-column: span 2; background:var(--gold); color:#000; }
+.btn-main { padding:12px 30px; background:var(--red); color:#fff; border:none; border-radius:25px; margin-top:20px; }
 
-.screen {
-    width: 100vw; height: 100vh;
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    padding: 20px;
-}
-
-.hidden { display: none !important; }
-
-/* Logo Animation */
-.logo-animation {
-    font-size: 3rem;
-    text-transform: uppercase;
-    background: linear-gradient(90deg, #ff0000, #ffffff, #ff0000);
-    background-size: 200%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: shine 3s infinite linear;
-}
-
-@keyframes shine {
-    to { background-position: 200%; }
-}
-
-/* Character & Mouth Sync Animation */
-.char-container { position: relative; width: 250px; }
-#girl-img { width: 100%; filter: drop-shadow(0 0 10px red); }
+/* Character */
+#character-area { position:relative; height:45%; display:flex; flex-direction:column; align-items:center; }
+#girl-img { height:100%; filter: drop-shadow(0 0 10px #f00); }
 .talking { animation: mouth 0.2s infinite alternate; }
-@keyframes mouth {
-    from { transform: scaleY(1); }
-    to { transform: scaleY(1.05); }
-}
+@keyframes mouth { from { transform: scaleY(1); } to { transform: scaleY(1.05); } }
 
-/* Grid for Mood Buttons */
-.grid-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
-    width: 100%;
-    max-width: 400px;
-    margin-top: 20px;
-}
+/* Fake Ads */
+.fake-ad-top { width:100%; height:50px; background:#1a1a1a; border:1px dashed #444; font-size:10px; margin-bottom:10px; display:flex; align-items:center; justify-content:center; }
 
-.mood-btn {
-    padding: 20px; border-radius: 12px;
-    background: #1a1a1a; color: white;
-    border: 1px solid #333; font-weight: bold;
-    cursor: pointer; transition: 0.3s;
-}
-
-.noble-btn { grid-column: span 2; background: var(--gold); color: #000; }
-
-.fake-ad-top {
-    width: 100%; height: 50px; background: #222;
-    text-align: center; line-height: 50px; font-size: 10px;
-}
-
-/* Settings Modal */
-.modal {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.9); z-index: 100;
-}
+/* Game Assets */
+.bubble { width:40px; height:40px; background:radial-gradient(circle, #f00, #000); border-radius:50%; display:inline-block; margin:5px; }
+.bubble.popped { opacity:0.1; transform:scale(0.8); }
