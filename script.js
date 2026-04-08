@@ -15,8 +15,8 @@ function renderFlags() {
     const flagList = document.getElementById('flag-list');
     languages.forEach(lang => {
         const div = document.createElement('div');
-        div.style.cssText = "background:#222; padding:10px; border-radius:10px; width:120px;";
-        div.innerHTML = `<img src="${lang.flag}" style="width:40px;"><p>${lang.name}</p>`;
+        div.style.cssText = "background:#222; padding:10px; border-radius:10px; width:120px; cursor:pointer; margin:5px;";
+        div.innerHTML = `<img src="${lang.flag}" style="width:40px;"><p style="font-size:12px;">${lang.name}</p>`;
         div.onclick = () => showLegal(lang);
         flagList.appendChild(div);
     });
@@ -38,6 +38,20 @@ document.getElementById('start-journey-btn').onclick = () => {
     document.getElementById('mood-hub').classList.remove('hidden');
 };
 
-function openMood(type) {
-    alert("Opening " + type + " mode...");
+function openAngryMode() {
+    document.getElementById('mood-hub').classList.add('hidden');
+    document.getElementById('angry-mode').classList.remove('hidden');
+    const container = document.getElementById('bubble-container');
+    container.innerHTML = "";
+    for(let i=0; i<25; i++) {
+        const b = document.createElement('div');
+        b.className = 'bubble';
+        b.onclick = () => b.classList.add('popped');
+        container.appendChild(b);
+    }
+}
+
+function backToHub() {
+    document.getElementById('angry-mode').classList.add('hidden');
+    document.getElementById('mood-hub').classList.remove('hidden');
 }
